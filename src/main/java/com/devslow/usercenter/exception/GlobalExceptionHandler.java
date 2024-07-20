@@ -9,14 +9,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
- * 全局异常处理器
+ * 全局异常处理器（整个项目的全局异常，服务器异常及业务异常）
  * @author slow
  * @CurrentTime 2024-7-14 20:21:42
  */
-@RestControllerAdvice
-@Slf4j
+@RestControllerAdvice //aop 在调用方法前后提供额外处理
+@Slf4j  //日志对象
 public class GlobalExceptionHandler {
 
+    /**
+     * businessExceptionHandler只去捕获 BusinessException
+     * @param e
+     * @return
+     */
     @ExceptionHandler(BusinessException.class)
     public BaseResponse businessExceptionHandler(BusinessException e) {
         log.error("businessException:"+e.getMessage(), e);

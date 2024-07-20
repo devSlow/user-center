@@ -6,7 +6,7 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * 通用返回类
+ * 通用返回类（优化返回对象）
  *
  * @param <T>
  * @author slow
@@ -21,18 +21,16 @@ public class BaseResponse<T> implements Serializable {
     private String description;
 
 
-    public BaseResponse(int code, T data, String message) {
+    public BaseResponse(int code, T data, String description) {
         this.code = code;
         this.data = data;
-        this.message = message;
-    }
-
-    public BaseResponse(int code, T data) {
-        this.code = code;
-        this.data = data;
+        this.description = description;
     }
 
     public BaseResponse(ErrorCode errorCode) {
-        this(errorCode.getCode(), null, errorCode.getMessage(), errorCode.getDescription());
+        this.code = errorCode.getCode();
+        this.message = errorCode.getMessage();
+        this.description = errorCode.getDescription();
     }
+
 }

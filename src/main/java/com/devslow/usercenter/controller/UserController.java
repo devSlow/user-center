@@ -192,6 +192,7 @@ public class UserController {
      * @CurrentTime 2024-7-14 06:46:40
      */
     @PostMapping("/delete")
+//    泛型必须是包装对象，不能是基本数据类型
     public BaseResponse<Boolean> deleteUser(HttpServletRequest request, @RequestBody Long id) {
         if (!isAdmin(request)) {
             log.info("delete user failed, user is not admin");
